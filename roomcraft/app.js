@@ -217,7 +217,7 @@ function initNavigation() {
   if (useDemoBtn) {
     useDemoBtn.addEventListener('click', (event) => {
       event.preventDefault();
-      handleImageUploadFromUrl('assets/images/room-before.png');
+      handleImageUploadFromUrl('room-before.png');
     });
   }
 
@@ -333,7 +333,7 @@ function handleImageUploadFromUrl(url) {
 function startAnalysis() {
   const analysisPreviewImg = document.querySelector('#screen-analysis .analysis-room-preview img');
   if (analysisPreviewImg) {
-    analysisPreviewImg.src = app.uploadedImage || 'assets/images/room-before.png';
+    analysisPreviewImg.src = app.uploadedImage || 'room-before.png';
   }
 
   const progressFill = document.querySelector('#screen-analysis .progress-fill');
@@ -435,8 +435,8 @@ function initComparison() {
   const style = app.selectedStyle || 'modern';
   
   // Set images. If we don't have user image, use default before
-  beforeImg.src = app.uploadedImage || 'assets/images/room-before.png';
-  afterImg.src = app.liveStyleImages[style] || `assets/images/room-${style}.png`;
+  beforeImg.src = app.uploadedImage || 'room-before.png';
+  afterImg.src = app.liveStyleImages[style] || `room-${style}.png`;
 
   let isDragging = false;
 
@@ -484,7 +484,7 @@ function initComparison() {
       card.classList.add('active');
       const varStyle = card.getAttribute('data-variation');
       app.selectedStyle = varStyle; // update selected style
-      afterImg.src = app.liveStyleImages[varStyle] || `assets/images/room-${varStyle}.png`;
+      afterImg.src = app.liveStyleImages[varStyle] || `room-${varStyle}.png`;
     });
   });
 
@@ -562,7 +562,7 @@ function renderShopping() {
   const roomImage = document.getElementById('shopping-room-image');
   const styleBadge = document.getElementById('shopping-style-badge');
   const budgetBadge = document.getElementById('shopping-budget-badge');
-  if (roomImage) roomImage.src = `assets/images/room-${currentStyle}.png`;
+  if (roomImage) roomImage.src = `room-${currentStyle}.png`;
   if (styleBadge) styleBadge.textContent = currentStyle.charAt(0).toUpperCase() + currentStyle.slice(1);
   if (budgetBadge) budgetBadge.textContent = app.selectedBudget === 'premium' ? 'Premium' : app.selectedBudget === 'low' ? 'Budget' : 'Mid-Range';
   if (updateLiveImages) loadLiveShoppingImages();
