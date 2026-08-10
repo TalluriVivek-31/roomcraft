@@ -94,19 +94,19 @@
 
         <div class="hero-image-grid" data-animate="animate-slide-up">
           <div class="hero-image-card animate-float">
-            <img src="assets/images/room-modern.png" alt="Modern living room design" loading="lazy">
+            <img src="room-modern.png" alt="Modern living room design" loading="lazy">
             <div class="hero-image-overlay">
               <span class="badge">Modern</span>
             </div>
           </div>
           <div class="hero-image-card animate-float-delayed">
-            <img src="assets/images/room-classic.png" alt="Classic living room design" loading="lazy">
+            <img src="room-classic.png" alt="Classic living room design" loading="lazy">
             <div class="hero-image-overlay">
               <span class="badge">Classic</span>
             </div>
           </div>
           <div class="hero-image-card animate-float-delayed-2">
-            <img src="assets/images/room-boho.png" alt="Bohemian living room design" loading="lazy">
+            <img src="room-boho.png" alt="Bohemian living room design" loading="lazy">
             <div class="hero-image-overlay">
               <span class="badge">Bohemian</span>
             </div>
@@ -218,7 +218,7 @@
         </div>
 
         <div class="analysis-room-preview" id="analysis-preview">
-          <img id="analysis-image" src="assets/images/room-before.png" alt="Room being analyzed">
+          <img id="analysis-image" src="room-before.png" alt="Room being analyzed">
           <div class="scan-line"></div>
         </div>
 
@@ -280,14 +280,14 @@
   <section id="screen-styles" class="screen">
     <div class="container">
       <div class="style-header text-center">
-        <h2 class="heading-lg">Choose Your <span class="text-gradient">Style</span></h2>
-        <p class="text-md text-muted" style="margin-top: 8px;">Select a design aesthetic for your room</p>
+        <h2 class="heading-lg">Choose Live <span class="text-gradient">Inspiration</span></h2>
+        <p class="text-md text-muted" style="margin-top: 8px;">Fresh room references fetched from the web for your design direction</p>
       </div>
 
       <div class="style-grid">
         <div class="style-card glass-card" data-style="modern">
           <div class="style-image">
-            <img src="assets/images/room-modern.png" alt="Modern style interior">
+            <img src="room-modern.png" alt="Modern style interior">
           </div>
           <div class="style-info">
             <h3 class="style-name heading-sm">Modern Minimalist</h3>
@@ -302,7 +302,7 @@
 
         <div class="style-card glass-card" data-style="classic">
           <div class="style-image">
-            <img src="assets/images/room-classic.png" alt="Classic style interior">
+            <img src="room-classic.png" alt="Classic style interior">
           </div>
           <div class="style-info">
             <h3 class="style-name heading-sm">Classic Traditional</h3>
@@ -317,7 +317,7 @@
 
         <div class="style-card glass-card" data-style="boho">
           <div class="style-image">
-            <img src="assets/images/room-boho.png" alt="Bohemian style interior">
+            <img src="room-boho.png" alt="Bohemian style interior">
           </div>
           <div class="style-info">
             <h3 class="style-name heading-sm">Bohemian Eclectic</h3>
@@ -366,16 +366,16 @@
   <section id="screen-results" class="screen">
     <div class="container">
       <div class="results-header text-center">
-        <h2 class="heading-lg">Your AI-Generated <span class="text-gradient">Design</span></h2>
-        <p class="text-md text-muted" style="margin-top: 8px;">Drag the slider to compare before and after</p>
+        <h2 class="heading-lg">Your Room <span class="text-gradient">Inspiration</span></h2>
+        <p class="text-md text-muted" style="margin-top: 8px;">Compare your uploaded room with a fresh live design reference</p>
       </div>
 
       <div class="comparison-container" id="comparison-container">
         <div class="comparison-before" id="comparison-before-wrapper">
-          <img id="comparison-before" src="assets/images/room-before.png" alt="Original room">
+          <img id="comparison-before" src="room-before.png" alt="Original room">
         </div>
         <div class="comparison-after">
-          <img id="comparison-after" src="assets/images/room-modern.png" alt="AI-redesigned room">
+          <img id="comparison-after" src="room-modern.png" alt="AI-redesigned room">
         </div>
         <div class="comparison-slider" id="comparison-slider">
           <div class="slider-handle">
@@ -391,19 +391,19 @@
         <h3 class="heading-sm">Style Variations</h3>
         <div class="variations-grid">
           <div class="variation-card active" data-variation="modern">
-            <img src="assets/images/room-modern.png" alt="Modern variation">
+            <img src="room-modern.png" alt="Modern variation">
             <div class="variation-label">Modern</div>
           </div>
           <div class="variation-card" data-variation="classic">
-            <img src="assets/images/room-classic.png" alt="Classic variation">
+            <img src="room-classic.png" alt="Classic variation">
             <div class="variation-label">Classic</div>
           </div>
           <div class="variation-card" data-variation="boho">
-            <img src="assets/images/room-boho.png" alt="Boho variation">
+            <img src="room-boho.png" alt="Boho variation">
             <div class="variation-label">Bohemian</div>
           </div>
           <div class="variation-card" data-variation="premium">
-            <img src="assets/images/room-premium.png" alt="Premium variation">
+            <img src="room-premium.png" alt="Premium variation">
             <div class="variation-label">Premium</div>
           </div>
         </div>
@@ -441,15 +441,17 @@
         <div>
           <h2 class="heading-lg">Shop the <span class="text-gradient">Look</span></h2>
           <p class="text-md text-muted" style="margin-top: 4px;">Curated products to bring your design to life</p>
+          <p class="text-xs text-muted live-image-status" id="live-image-status" aria-live="polite">Live inspiration ready</p>
         </div>
-        <button class="btn btn-ghost" id="btn-back-to-results" data-screen="results">
-          ← Back to Design
-        </button>
+        <div class="shopping-header-actions">
+          <button class="btn btn-secondary btn-sm" id="btn-refresh-images">Refresh live images</button>
+          <button class="btn btn-ghost" id="btn-back-to-results" data-screen="results">← Back to Design</button>
+        </div>
       </div>
 
       <div class="shopping-layout">
         <div class="shopping-room">
-          <img id="shopping-room-image" src="assets/images/room-modern.png" alt="Selected room design">
+          <img id="shopping-room-image" src="room-modern.png" alt="Selected room design">
           <div class="shopping-room-badge">
             <span class="badge badge-primary" id="shopping-style-badge">Modern</span>
             <span class="badge" id="shopping-budget-badge">Mid-Range</span>
@@ -509,7 +511,7 @@
   <!-- ══════════════════════════════════════════════════════════ -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal glass-card">
-      <button class="btn btn-icon btn-ghost modal-close" id="modal-close">
+      <button class="btn btn-icon btn-ghost modal-close" id="modal-close" aria-label="Close premium plans" title="Close">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 

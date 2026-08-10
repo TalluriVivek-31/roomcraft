@@ -10,7 +10,10 @@ const app = {
   selectedBudget: 'medium',
   analysisComplete: false,
   savedDesigns: JSON.parse(localStorage.getItem('roomvision-designs') || '[]'),
-  isNavOpen: false
+  isNavOpen: false,
+  liveImages: [],
+  liveImageRequest: 0,
+  liveStyleImages: {}
 };
 
 // 15. Helper: Generate SVG Icons
@@ -83,6 +86,57 @@ const analysisSteps = [
   { id: 'detect-style', label: 'Analyzing current style profile', duration: 1600, result: 'Contemporary Casual' }
 ];
 
+const fallbackImage = (style, index = 0) =>
+  `https://loremflickr.com/640/480/${encodeURIComponent(`${style} interior furniture`)}/?lock=${style}-${index}`;
+
+async function fetchLiveImages(style, count = 8) {
+  const query = `${style} interior design furniture`;
+  const endpoint = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(query)}&gsrnamespace=6&gsrlimit=${count}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640&format=json&origin=*`;
+
+  try {
+    const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error(`Image service returned ${response.status}`);
+    const data = await response.json();
+    return Object.values(data.query?.pages || {})
+      .map(page => page.imageinfo?.[0]?.thumburl || page.imageinfo?.[0]?.url)
+      .filter(Boolean)
+      .slice(0, count);
+  } catch (error) {
+    return Array.from({ length: count }, (_, index) => fallbackImage(style, index));
+  }
+}
+
+async function loadLiveShoppingImages() {
+  const style = app.selectedStyle || 'modern';
+  const targetProducts = products[style] || products.modern;
+  const requestId = ++app.liveImageRequest;
+  const status = document.getElementById('live-image-status');
+  const refreshButton = document.getElementById('btn-refresh-images');
+  if (status) status.textContent = 'Finding fresh room inspiration...';
+  if (refreshButton) refreshButton.disabled = true;
+
+  const images = await fetchLiveImages(style, targetProducts.length);
+  if (requestId !== app.liveImageRequest) return;
+  app.liveImages = images;
+  targetProducts.forEach((product, index) => {
+    product.image = images[index] || fallbackImage(style, index);
+  });
+  renderShopping(false);
+  if (status) status.textContent = `Live ${style} inspiration updated`;
+  if (refreshButton) refreshButton.disabled = false;
+}
+
+async function loadLiveStyleImages() {
+  const styles = ['modern', 'classic', 'boho'];
+  const imageGroups = await Promise.all(styles.map(style => fetchLiveImages(`${style} living room`, 2)));
+
+  styles.forEach((style, index) => {
+    app.liveStyleImages[style] = imageGroups[index][0] || fallbackImage(style, 0);
+    const cardImage = document.querySelector(`.style-card[data-style="${style}"] img`);
+    if (cardImage) cardImage.src = app.liveStyleImages[style];
+  });
+}
+
 // 2. Screen Router
 function navigateTo(screenId) {
   // Remove .active from all screens
@@ -121,6 +175,8 @@ function navigateTo(screenId) {
     initComparison();
   } else if (screenId === 'shopping') {
     renderShopping();
+  } else if (screenId === 'styles') {
+    loadLiveStyleImages();
   }
 }
 
@@ -156,6 +212,22 @@ function initNavigation() {
   if (tryNowBtn) {
     tryNowBtn.addEventListener('click', () => navigateTo('upload'));
   }
+
+  const useDemoBtn = document.getElementById('btn-use-demo');
+  if (useDemoBtn) {
+    useDemoBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      handleImageUploadFromUrl('room-before.png');
+    });
+  }
+
+  const changePhotoBtn = document.getElementById('btn-change-photo');
+  if (changePhotoBtn) {
+    changePhotoBtn.addEventListener('click', () => document.getElementById('file-input')?.click());
+  }
+
+  const refreshImagesBtn = document.getElementById('btn-refresh-images');
+  if (refreshImagesBtn) refreshImagesBtn.addEventListener('click', loadLiveShoppingImages);
 
   document.querySelectorAll('.btn-open-premium, #btn-premium').forEach(btn => {
     btn.addEventListener('click', openPremiumModal);
@@ -250,11 +322,18 @@ function handleImageUpload(file) {
   reader.readAsDataURL(file);
 }
 
+function handleImageUploadFromUrl(url) {
+  fetch(url)
+    .then(response => response.blob())
+    .then(blob => handleImageUpload(new File([blob], 'demo-room.png', { type: blob.type })))
+    .catch(() => showToast('The demo room could not be loaded.', 'error'));
+}
+
 // 5. AI Analysis Simulation
 function startAnalysis() {
-  const analysisPreviewImg = document.querySelector('#screen-analysis .analysis-preview img');
+  const analysisPreviewImg = document.querySelector('#screen-analysis .analysis-room-preview img');
   if (analysisPreviewImg) {
-    analysisPreviewImg.src = app.uploadedImage || 'assets/images/room-before.png';
+    analysisPreviewImg.src = app.uploadedImage || 'room-before.png';
   }
 
   const progressFill = document.querySelector('#screen-analysis .progress-fill');
@@ -356,8 +435,8 @@ function initComparison() {
   const style = app.selectedStyle || 'modern';
   
   // Set images. If we don't have user image, use default before
-  beforeImg.querySelector('img').src = app.uploadedImage || 'assets/images/room-before.png';
-  afterImg.querySelector('img').src = `assets/images/room-${style}.png`;
+  beforeImg.src = app.uploadedImage || 'room-before.png';
+  afterImg.src = app.liveStyleImages[style] || `room-${style}.png`;
 
   let isDragging = false;
 
@@ -403,9 +482,9 @@ function initComparison() {
     card.addEventListener('click', () => {
       variationCards.forEach(c => c.classList.remove('active'));
       card.classList.add('active');
-      const varStyle = card.getAttribute('data-style');
+      const varStyle = card.getAttribute('data-variation');
       app.selectedStyle = varStyle; // update selected style
-      afterImg.querySelector('img').src = `assets/images/room-${varStyle}.png`;
+      afterImg.src = app.liveStyleImages[varStyle] || `room-${varStyle}.png`;
     });
   });
 
@@ -428,7 +507,7 @@ function initComparison() {
         id: Date.now(),
         style: app.selectedStyle,
         budget: app.selectedBudget,
-        image: afterImg.querySelector('img').src,
+        image: afterImg.src,
         date: new Date().toLocaleDateString(),
         name: `${app.selectedStyle.charAt(0).toUpperCase() + app.selectedStyle.slice(1)} Living Room`
       };
@@ -448,7 +527,8 @@ function initComparison() {
 
 // 8. Shopping Screen
 function renderShopping() {
-  const container = document.querySelector('#screen-shopping .shopping-grid');
+  const updateLiveImages = arguments.length === 0;
+  const container = document.querySelector('#screen-shopping .product-list');
   if (!container) return;
 
   const currentStyle = app.selectedStyle || 'modern';
@@ -460,8 +540,8 @@ function renderShopping() {
     totalBudget += p.price;
     return `
       <div class="product-card">
-        <div class="product-image" style="background: linear-gradient(135deg, var(--bg-elevated), var(--bg-glass)); display:flex; align-items:center; justify-content:center;">
-          ${getCategoryIcon(p.category)}
+        <div class="product-image">
+          ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.replaceWith(document.createTextNode('Image unavailable'))">` : getCategoryIcon(p.category)}
         </div>
         <div class="product-info">
           <div class="product-brand">${p.brand}</div>
@@ -474,10 +554,18 @@ function renderShopping() {
     `;
   }).join('');
 
-  const budgetTotalEl = document.querySelector('#screen-shopping .budget-total');
+  const budgetTotalEl = document.getElementById('total-price');
   if (budgetTotalEl) {
-    budgetTotalEl.textContent = `Total Estimated: $${totalBudget.toLocaleString()}`;
+    budgetTotalEl.textContent = `$${totalBudget.toLocaleString()}`;
   }
+
+  const roomImage = document.getElementById('shopping-room-image');
+  const styleBadge = document.getElementById('shopping-style-badge');
+  const budgetBadge = document.getElementById('shopping-budget-badge');
+  if (roomImage) roomImage.src = `room-${currentStyle}.png`;
+  if (styleBadge) styleBadge.textContent = currentStyle.charAt(0).toUpperCase() + currentStyle.slice(1);
+  if (budgetBadge) budgetBadge.textContent = app.selectedBudget === 'premium' ? 'Premium' : app.selectedBudget === 'low' ? 'Budget' : 'Mid-Range';
+  if (updateLiveImages) loadLiveShoppingImages();
 }
 
 // 9. Dashboard Screen
@@ -545,14 +633,14 @@ function renderDashboard() {
 
 // 10. Premium Modal
 function openPremiumModal() {
-  const modal = document.getElementById('modal-premium');
+  const modal = document.getElementById('modal-overlay');
   if (modal) {
     modal.classList.add('active');
   }
 }
 
 function closePremiumModal() {
-  const modal = document.getElementById('modal-premium');
+  const modal = document.getElementById('modal-overlay');
   if (modal) {
     modal.classList.remove('active');
   }
@@ -564,7 +652,7 @@ function initModal() {
     modalCloseBtn.addEventListener('click', closePremiumModal);
   }
 
-  const modalOverlay = document.getElementById('modal-premium');
+  const modalOverlay = document.getElementById('modal-overlay');
   if (modalOverlay) {
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
