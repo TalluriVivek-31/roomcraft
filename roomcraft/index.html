@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoomVision AI — Transform Any Room with Artificial Intelligence</title>
+  <meta name="description" content="Upload a photo of any room and let AI redesign it in seconds. Choose from Modern, Classic, and Bohemian styles with smart budget planning and shoppable furniture.">
+  <meta property="og:title" content="RoomVision AI — AI-Powered Interior Design">
+  <meta property="og:description" content="Transform any room with the power of AI. Upload, redesign, and shop — all in one place.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#7857FF">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- NAVIGATION BAR                                            -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-content container">
+      <a href="#" class="nav-logo" data-screen="landing">
+        <div class="nav-logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <span class="nav-brand">RoomVision <span class="text-gradient">AI</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#" data-screen="landing" class="active">Home</a>
+        <a href="#" data-screen="upload">Design</a>
+        <a href="#" data-screen="dashboard">My Rooms</a>
+      </div>
+      <div class="nav-right">
+        <button class="btn btn-sm btn-primary" id="btn-premium">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Upgrade
+        </button>
+        <button class="nav-mobile-toggle btn btn-icon btn-ghost" id="btn-nav-toggle" aria-label="Toggle menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 1: LANDING / HERO                                  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-landing" class="screen active">
+    <div class="hero-section">
+      <div class="hero-bg-glow"></div>
+      <div class="container">
+        <div class="hero-content" data-animate="animate-fade-in">
+          <div class="hero-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            AI-Powered Interior Design
+          </div>
+          <h1 class="hero-title heading-xl">
+            Reimagine Any Room<br>with <span class="text-gradient">Artificial Intelligence</span>
+          </h1>
+          <p class="hero-subtitle text-lg text-muted">
+            Upload a photo of your space and watch AI transform it into stunning designs. Choose styles, set budgets, and shop curated furniture — all in seconds.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" id="btn-get-started">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              Start Designing
+            </button>
+            <button class="btn btn-secondary btn-lg" id="btn-try-now">
+              See it in action
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="heading-md text-gradient">50K+</div>
+              <div class="text-xs text-muted">Rooms Designed</div>
+            </div>
+            <div class="hero-stat">
+              <div class="heading-md text-gradient">4.9★</div>
+              <div class="text-xs text-muted">User Rating</div>
+            </div>
+            <div class="hero-stat">
+              <div class="heading-md text-gradient">3 sec</div>
+              <div class="text-xs text-muted">Avg. Analysis</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-grid" data-animate="animate-slide-up">
+          <div class="hero-image-card animate-float">
+            <img src="assets/images/room-modern.png" alt="Modern living room design" loading="lazy">
+            <div class="hero-image-overlay">
+              <span class="badge">Modern</span>
+            </div>
+          </div>
+          <div class="hero-image-card animate-float-delayed">
+            <img src="assets/images/room-classic.png" alt="Classic living room design" loading="lazy">
+            <div class="hero-image-overlay">
+              <span class="badge">Classic</span>
+            </div>
+          </div>
+          <div class="hero-image-card animate-float-delayed-2">
+            <img src="assets/images/room-boho.png" alt="Bohemian living room design" loading="lazy">
+            <div class="hero-image-overlay">
+              <span class="badge">Bohemian</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features-section container">
+      <h2 class="heading-lg text-center" data-animate="animate-fade-in">How It <span class="text-gradient">Works</span></h2>
+      <p class="text-md text-muted text-center features-subtitle" data-animate="animate-fade-in">Three simple steps to your dream room</p>
+      <div class="features-grid">
+        <div class="feature-card glass-card" data-animate="animate-slide-up">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+          <h3 class="heading-sm">Upload a Photo</h3>
+          <p class="text-sm text-muted">Snap or upload any room photo. Our AI instantly detects walls, furniture, lighting, and spatial dimensions.</p>
+        </div>
+        <div class="feature-card glass-card" data-animate="animate-slide-up">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+          <h3 class="heading-sm">Choose Your Style</h3>
+          <p class="text-sm text-muted">Pick from Modern, Classic, or Bohemian aesthetics. Set your budget tier and let AI craft the perfect design.</p>
+        </div>
+        <div class="feature-card glass-card" data-animate="animate-slide-up">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+          </div>
+          <h3 class="heading-sm">Shop the Look</h3>
+          <p class="text-sm text-muted">Every item in your AI-generated design is linked to real products. Browse, compare, and purchase directly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 2: UPLOAD                                          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-upload" class="screen">
+    <div class="container">
+      <div class="upload-header text-center">
+        <h2 class="heading-lg">Upload Your <span class="text-gradient">Room</span></h2>
+        <p class="text-md text-muted">Drag and drop a photo or click to browse. We support JPG, PNG, and WebP.</p>
+      </div>
+
+      <div class="upload-wrapper">
+        <div id="upload-zone" class="upload-zone">
+          <div class="upload-icon">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+            </svg>
+          </div>
+          <p class="upload-text heading-sm">Drop your room photo here</p>
+          <p class="upload-hint text-sm text-muted">or click to browse files</p>
+          <p class="upload-formats text-xs text-muted" style="margin-top: 16px;">JPG, PNG, WebP — up to 10MB</p>
+          <input type="file" id="file-input" accept="image/*" hidden>
+        </div>
+
+        <div id="upload-preview" class="upload-preview" style="display:none;">
+          <img id="preview-image" src="" alt="Uploaded room preview">
+          <button id="btn-remove-upload" class="btn btn-icon btn-ghost upload-remove" title="Remove photo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div id="upload-actions" class="upload-actions" style="display:none;">
+          <button class="btn btn-secondary" id="btn-change-photo">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Change Photo
+          </button>
+          <button class="btn btn-primary" id="btn-analyze">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            Analyze with AI
+          </button>
+        </div>
+
+        <div class="upload-demo-note text-center" style="margin-top: 24px;">
+          <p class="text-sm text-muted">Don't have a photo? <a href="#" id="btn-use-demo" class="text-gradient" style="text-decoration:underline; cursor:pointer;">Use our demo room</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 3: AI ANALYSIS                                     -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-analysis" class="screen">
+    <div class="container">
+      <div class="analysis-container glass-card">
+        <div class="analysis-header text-center">
+          <h2 class="heading-md">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px;">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            Analyzing Your Room
+          </h2>
+          <p class="text-sm text-muted" style="margin-top: 8px;">Our AI is scanning every detail…</p>
+        </div>
+
+        <div class="analysis-room-preview" id="analysis-preview">
+          <img id="analysis-image" src="assets/images/room-before.png" alt="Room being analyzed">
+          <div class="scan-line"></div>
+        </div>
+
+        <div class="analysis-steps" id="analysis-steps">
+          <div class="analysis-step" data-step="detect-room">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Detecting room boundaries</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+          <div class="analysis-step" data-step="detect-walls">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Analyzing wall surfaces</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+          <div class="analysis-step" data-step="detect-furniture">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Identifying furniture</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+          <div class="analysis-step" data-step="detect-lighting">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Evaluating lighting conditions</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+          <div class="analysis-step" data-step="detect-dimensions">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Calculating spatial dimensions</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+          <div class="analysis-step" data-step="detect-style">
+            <div class="step-icon pending">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="step-label">Analyzing current style profile</div>
+            <div class="step-status text-sm text-muted">Waiting…</div>
+          </div>
+        </div>
+
+        <div class="analysis-progress">
+          <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 4: STYLE SELECTION                                 -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-styles" class="screen">
+    <div class="container">
+      <div class="style-header text-center">
+        <h2 class="heading-lg">Choose Live <span class="text-gradient">Inspiration</span></h2>
+        <p class="text-md text-muted" style="margin-top: 8px;">Fresh room references fetched from the web for your design direction</p>
+      </div>
+
+      <div class="style-grid">
+        <div class="style-card glass-card" data-style="modern">
+          <div class="style-image">
+            <img src="assets/images/room-modern.png" alt="Modern style interior">
+          </div>
+          <div class="style-info">
+            <h3 class="style-name heading-sm">Modern Minimalist</h3>
+            <p class="style-desc text-sm text-muted">Clean lines, neutral palettes, and curated simplicity. Less is more — every piece serves a purpose.</p>
+            <div class="style-tags">
+              <span class="badge">Clean Lines</span>
+              <span class="badge">Neutral Tones</span>
+              <span class="badge">Minimal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-card glass-card" data-style="classic">
+          <div class="style-image">
+            <img src="assets/images/room-classic.png" alt="Classic style interior">
+          </div>
+          <div class="style-info">
+            <h3 class="style-name heading-sm">Classic Traditional</h3>
+            <p class="style-desc text-sm text-muted">Timeless elegance with rich materials, ornate details, and a sense of history. Sophisticated and warm.</p>
+            <div class="style-tags">
+              <span class="badge">Elegant</span>
+              <span class="badge">Rich Tones</span>
+              <span class="badge">Ornate</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-card glass-card" data-style="boho">
+          <div class="style-image">
+            <img src="assets/images/room-boho.png" alt="Bohemian style interior">
+          </div>
+          <div class="style-info">
+            <h3 class="style-name heading-sm">Bohemian Eclectic</h3>
+            <p class="style-desc text-sm text-muted">Warm textures, earthy tones, and curated chaos. A cozy, lived-in look with global influences.</p>
+            <div class="style-tags">
+              <span class="badge">Earthy</span>
+              <span class="badge">Textured</span>
+              <span class="badge">Cozy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="budget-section text-center">
+        <h3 class="heading-sm" style="margin-bottom: 16px;">Set Your Budget Tier</h3>
+        <div class="budget-selector">
+          <button class="budget-option" data-budget="low">
+            <span class="budget-label">Budget</span>
+            <span class="budget-range text-xs text-muted">Under $3K</span>
+          </button>
+          <button class="budget-option active" data-budget="medium">
+            <span class="budget-label">Mid-Range</span>
+            <span class="budget-range text-xs text-muted">$3K – $8K</span>
+          </button>
+          <button class="budget-option" data-budget="premium">
+            <span class="budget-label">Premium</span>
+            <span class="budget-range text-xs text-muted">$8K+</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="style-actions text-center">
+        <button class="btn btn-primary btn-lg" id="btn-continue-to-results" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Generate Design
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 5: RESULTS                                         -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-results" class="screen">
+    <div class="container">
+      <div class="results-header text-center">
+        <h2 class="heading-lg">Your Room <span class="text-gradient">Inspiration</span></h2>
+        <p class="text-md text-muted" style="margin-top: 8px;">Compare your uploaded room with a fresh live design reference</p>
+      </div>
+
+      <div class="comparison-container" id="comparison-container">
+        <div class="comparison-before" id="comparison-before-wrapper">
+          <img id="comparison-before" src="assets/images/room-before.png" alt="Original room">
+        </div>
+        <div class="comparison-after">
+          <img id="comparison-after" src="assets/images/room-modern.png" alt="AI-redesigned room">
+        </div>
+        <div class="comparison-slider" id="comparison-slider">
+          <div class="slider-handle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <span class="comparison-label before">Before</span>
+        <span class="comparison-label after">After</span>
+      </div>
+
+      <div class="variations-section">
+        <h3 class="heading-sm">Style Variations</h3>
+        <div class="variations-grid">
+          <div class="variation-card active" data-variation="modern">
+            <img src="assets/images/room-modern.png" alt="Modern variation">
+            <div class="variation-label">Modern</div>
+          </div>
+          <div class="variation-card" data-variation="classic">
+            <img src="assets/images/room-classic.png" alt="Classic variation">
+            <div class="variation-label">Classic</div>
+          </div>
+          <div class="variation-card" data-variation="boho">
+            <img src="assets/images/room-boho.png" alt="Boho variation">
+            <div class="variation-label">Bohemian</div>
+          </div>
+          <div class="variation-card" data-variation="premium">
+            <img src="assets/images/room-premium.png" alt="Premium variation">
+            <div class="variation-label">Premium</div>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 24px;">
+          <button class="btn btn-secondary" id="btn-generate-more">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Generate More Variations
+          </button>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn btn-primary" id="btn-view-shopping">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Shop This Look
+        </button>
+        <button class="btn btn-secondary" id="btn-save-design">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Design
+        </button>
+        <button class="btn btn-ghost" id="btn-new-design" data-screen="upload">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Design
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 6: SHOPPING                                        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-shopping" class="screen">
+    <div class="container">
+      <div class="shopping-header">
+        <div>
+          <h2 class="heading-lg">Shop the <span class="text-gradient">Look</span></h2>
+          <p class="text-md text-muted" style="margin-top: 4px;">Curated products to bring your design to life</p>
+          <p class="text-xs text-muted live-image-status" id="live-image-status" aria-live="polite">Live inspiration ready</p>
+        </div>
+        <div class="shopping-header-actions">
+          <button class="btn btn-secondary btn-sm" id="btn-refresh-images">Refresh live images</button>
+          <button class="btn btn-ghost" id="btn-back-to-results" data-screen="results">← Back to Design</button>
+        </div>
+      </div>
+
+      <div class="shopping-layout">
+        <div class="shopping-room">
+          <img id="shopping-room-image" src="assets/images/room-modern.png" alt="Selected room design">
+          <div class="shopping-room-badge">
+            <span class="badge badge-primary" id="shopping-style-badge">Modern</span>
+            <span class="badge" id="shopping-budget-badge">Mid-Range</span>
+          </div>
+        </div>
+        <div class="shopping-sidebar">
+          <div class="product-list" id="product-list">
+            <!-- Products generated by JS -->
+          </div>
+          <div class="shopping-total glass-card" id="shopping-total">
+            <div>
+              <div class="text-sm text-muted">Estimated Total</div>
+              <div class="heading-md text-gradient" id="total-price">$4,346</div>
+            </div>
+            <button class="btn btn-primary btn-sm">Checkout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- SCREEN 7: DASHBOARD                                       -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <section id="screen-dashboard" class="screen">
+    <div class="container">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="heading-lg">My <span class="text-gradient">Rooms</span></h2>
+          <p class="text-md text-muted" style="margin-top: 4px;">Your saved room designs</p>
+        </div>
+        <button class="btn btn-primary" id="btn-new-room" data-screen="upload">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Design
+        </button>
+      </div>
+
+      <div class="dashboard-grid" id="dashboard-grid">
+        <!-- Cards generated by JS -->
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <h3 class="heading-sm text-muted">No saved designs yet</h3>
+        <p class="text-sm text-muted" style="margin-top: 8px;">Upload a room photo and create your first AI design</p>
+        <button class="btn btn-primary" style="margin-top: 24px;" data-screen="upload">Start Designing</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- PREMIUM MODAL                                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal glass-card">
+      <button class="btn btn-icon btn-ghost modal-close" id="modal-close" aria-label="Close premium plans" title="Close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="modal-header text-center">
+        <div class="modal-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="url(#grad-modal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <defs><linearGradient id="grad-modal" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:hsl(256,85%,62%)"/><stop offset="100%" style="stop-color:hsl(174,72%,56%)"/></linearGradient></defs>
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h2 class="heading-md modal-title">Unlock <span class="text-gradient">Premium</span></h2>
+        <p class="text-sm text-muted" style="margin-top: 8px;">Get unlimited designs, all styles, and priority AI processing</p>
+      </div>
+
+      <div class="pricing-tiers">
+        <div class="pricing-tier glass-card">
+          <h3 class="tier-name heading-sm">Monthly</h3>
+          <div class="tier-price heading-lg">$9.99</div>
+          <div class="tier-period text-sm text-muted">/month</div>
+          <ul class="tier-features">
+            <li>10 AI designs/month</li>
+            <li>All 3 style presets</li>
+            <li>Before/after comparisons</li>
+            <li>Save up to 20 designs</li>
+          </ul>
+          <button class="btn btn-secondary tier-cta">Choose Plan</button>
+        </div>
+        <div class="pricing-tier glass-card featured">
+          <div class="featured-badge">POPULAR</div>
+          <h3 class="tier-name heading-sm">Annual</h3>
+          <div class="tier-price heading-lg">$79.99</div>
+          <div class="tier-period text-sm text-muted">/year — save 33%</div>
+          <ul class="tier-features">
+            <li>Unlimited AI designs</li>
+            <li>All styles + Premium</li>
+            <li>Priority AI processing</li>
+            <li>Unlimited saved designs</li>
+            <li>Shopping integration</li>
+          </ul>
+          <button class="btn btn-primary tier-cta">Choose Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- TOAST CONTAINER                                           -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
